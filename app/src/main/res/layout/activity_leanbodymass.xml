@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LeanBodyMassActivity">
+
+    <TextView
+        android:id="@+id/lbmtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lean Body Mass Calculator"
+        android:textColor="@android:color/black"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:id="@+id/bodyWeightTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Body Weight"
+        android:textColor="@android:color/black"
+        android:textSize="34dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/lbmtitle"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/bodyWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bodyWeightTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:ems="10"
+        android:hint="Body Weight in Pounds"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/bodyfatTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Body Fat %"
+        android:textColor="@color/black"
+        android:textSize="34dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/bodyWeight"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/bodyFat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bodyfatTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:ems="10"
+        android:hint="Body Fat Percentage"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/lbmtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lean Body Mass"
+        android:textColor="@color/black"
+        android:textSize="34dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/bodyFat"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/lbm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbmtitle2"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:ems="10"
+        android:inputType="number" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/lbmConvert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbm"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:text="Convert" />
+
+</RelativeLayout>

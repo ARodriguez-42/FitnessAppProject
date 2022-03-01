@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WilksActivity">
+
+    <TextView
+        android:id="@+id/wilkstitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wilks Calculator"
+        android:textColor="@android:color/black"
+        android:textSize="34dp"
+        android:textStyle="bold"
+        android:layout_margin="15dp"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:id="@+id/bodyWeightTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Body Weight (KG)"
+        android:textColor="@android:color/black"
+        android:textSize="34dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/wilkstitle"
+        android:layout_margin="15dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/bodyWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bodyWeightTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_horizontal"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/weightLiftedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight Lifted (KG)"
+        android:textColor="@color/black"
+        android:textSize="34dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/bodyWeight"
+        android:layout_margin="15dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/weightLifted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/weightLiftedTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_horizontal"
+        android:ems="10"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/wilkstitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wilks Score"
+        android:textColor="@color/black"
+        android:textSize="34dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/weightLifted"
+        android:layout_margin="15dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/wilks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wilkstitle2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_horizontal"
+        android:ems="10"
+        android:inputType="number" />
+
+
+
+    <LinearLayout
+        android:layout_below="@+id/wilks"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        >
+
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp">
+
+            <RadioButton
+                android:id="@+id/radio_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                android:checked="true"
+                />
+
+            <RadioButton
+                android:id="@+id/radio_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                />
+
+        </RadioGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/wilksConvert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wilks"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@android:color/holo_orange_dark"
+            android:text="Convert" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

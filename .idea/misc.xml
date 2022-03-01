@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_bmiactivity.xml" value="0.2833333333333333" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_exercises.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_kg_to_lbs.xml" value="0.33" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_leanbodymass.xml" value="0.2692307692307692" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_main.xml" value="0.24124513618677043" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_main_menu.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_register.xml" value="0.33" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_wilks.xml" value="0.25" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/app_bar_main_menu.xml" value="0.18227848101265823" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/content_main_menu.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/exercise_item.xml" value="0.1" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_gallery.xml" value="0.33697916666666666" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_home.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_more.xml" value="0.33" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_slideshow.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/nav_header_main_menu.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/slideshow_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/menu/main_menu.xml" value="0.36614583333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
