@@ -1,17 +1,22 @@
 package com.example.fitnessapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -23,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     TextInputEditText etLoginEmail;
     TextInputEditText etLoginPassword;
     TextView tvRegisterHere;
+    TextView tvResetHere;
     Button btnLogin;
 
     FirebaseAuth mAuth;
@@ -36,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         etLoginPassword = findViewById(R.id.etLoginPass);
         tvRegisterHere = findViewById(R.id.tvRegisterHere);
         btnLogin = findViewById(R.id.btnLogin);
+        tvResetHere = findViewById(R.id.tvResetHere);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -45,7 +52,12 @@ public class MainActivity extends AppCompatActivity {
         tvRegisterHere.setOnClickListener(view ->{
             startActivity(new Intent(MainActivity.this, RegisterActivity.class));
         });
+        tvResetHere.setOnClickListener(view ->{
+            startActivity(new Intent(MainActivity.this, ResetPassword.class));
+        });
+
     }
+
 
     private void loginUser(){
         String email = etLoginEmail.getText().toString();

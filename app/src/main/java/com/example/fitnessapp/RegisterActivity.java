@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    TextInputEditText etRegUserName;
     TextInputEditText etRegEmail;
     TextInputEditText etRegPassword;
     TextView tvLoginHere;
@@ -32,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        etRegUserName = findViewById(R.id.etRegUserName);
         etRegEmail = findViewById(R.id.etRegEmail);
         etRegPassword = findViewById(R.id.etRegPass);
         tvLoginHere = findViewById(R.id.tvLoginHere);

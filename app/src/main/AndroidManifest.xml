@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessApp">
         <activity
+            android:name=".ResetPassword"
+            android:exported="false" />
+        <activity
+            android:name=".Macros"
+            android:exported="false" />
+        <activity
             android:name=".ui.slideshow.Exercises"
             android:exported="false" />
         <activity
