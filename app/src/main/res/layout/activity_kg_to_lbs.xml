@@ -7,6 +7,18 @@
     tools:context=".KGtoLBSActivity">
 
     <TextView
+        android:id="@+id/kglbsname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="KG/LBS Conversion"
+        android:textColor="@android:color/black"
+        android:textSize="34dp"
+        android:textStyle="bold"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
         android:id="@+id/kgname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,6 +27,7 @@
         android:textSize="34dp"
         android:textStyle="bold"
         android:layout_margin="20dp"
+        android:layout_below="@+id/kglbsname"
         android:layout_centerHorizontal="true"
         />
     <EditText
@@ -26,17 +39,56 @@
         android:inputType="number"
         android:gravity="center_horizontal"
         android:ems="10"
+        android:hint="KG Value to Convert"
         android:layout_margin="20dp"
         />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/KGConvert"
+    <LinearLayout
+        android:id="@+id/convertButtons"
+        android:layout_below="@+id/KGValue"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_orange_dark"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/KGValue"
-        android:layout_margin="20dp"
-        android:text="Convert to LBS"
+        >
+
+
+        <RadioGroup
+            android:id="@+id/radio_group_KG_LBS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp">
+
+            <RadioButton
+                android:id="@+id/radio_KG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KG to LBS"
+                android:checked="true"
+                />
+
+            <RadioButton
+                android:id="@+id/radio_LBS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LBS to KG"
+                />
+
+        </RadioGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/KGConvert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@android:color/holo_orange_dark"
+            android:text="Convert" />
+    </LinearLayout>
         />
     <TextView
         android:id="@+id/lbsname"
@@ -46,7 +98,7 @@
         android:textColor="@color/black"
         android:textSize="34dp"
         android:textStyle="bold"
-        android:layout_below="@+id/KGConvert"
+        android:layout_below="@+id/convertButtons"
         android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
         />
@@ -59,17 +111,11 @@
         android:inputType="number"
         android:gravity="center_horizontal"
         android:ems="10"
+        android:hint="LBS Value to Convert"
         android:layout_margin="20dp"
         />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/LBSConvert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_orange_dark"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/LBSValue"
-        android:layout_margin="20dp"
-        android:text="Convert to KG"
-        />
+
+
+
 
 </RelativeLayout>

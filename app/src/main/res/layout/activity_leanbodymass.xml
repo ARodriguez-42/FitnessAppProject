@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".LeanBodyMassActivity">
 
+
     <TextView
         android:id="@+id/lbmtitle"
         android:layout_width="wrap_content"
@@ -99,6 +100,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
+        android:hint="Lean Body Mass"
         android:ems="10"
         android:inputType="number" />
 

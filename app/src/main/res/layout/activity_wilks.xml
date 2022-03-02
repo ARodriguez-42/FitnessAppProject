@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".WilksActivity">
 
+
     <TextView
         android:id="@+id/wilkstitle"
         android:layout_width="wrap_content"
@@ -42,6 +43,7 @@
         android:layout_marginBottom="15dp"
         android:gravity="center_horizontal"
         android:ems="10"
+        android:hint="Enter Body Weight"
         android:inputType="number" />
 
     <TextView
@@ -69,6 +71,7 @@
         android:layout_marginBottom="15dp"
         android:gravity="center_horizontal"
         android:ems="10"
+        android:hint="Enter Weight Lifted"
         android:inputType="number" />
     <TextView
         android:id="@+id/wilkstitle2"
@@ -95,6 +98,7 @@
         android:layout_marginBottom="15dp"
         android:gravity="center_horizontal"
         android:ems="10"
+        android:hint="Your Wilks Score"
         android:inputType="number" />
 
 

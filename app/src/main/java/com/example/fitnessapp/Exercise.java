@@ -19,10 +19,12 @@ public class Exercise {
     }
 
     public String getEquipmentName() {
+
         return equipmentName;
     }
 
     public String getImage() {
+
         return image;
     }
 }

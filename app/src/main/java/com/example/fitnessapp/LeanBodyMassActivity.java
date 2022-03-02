@@ -2,17 +2,20 @@ package com.example.fitnessapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.fitnessapp.ui.more.More;
 import com.google.android.material.button.MaterialButton;
 
 public class LeanBodyMassActivity extends AppCompatActivity {
 
     MaterialButton lbmConvert;
     EditText bodyWeight, bodyFat, lbm;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
