@@ -34,7 +34,7 @@ public class Exercises extends AppCompatActivity implements RecyclerViewInterfac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises);
 
-        recyclerView = (RecyclerView) findViewById(R.id.exerciseList);
+        recyclerView = findViewById(R.id.exerciseList);
         databaseReference = FirebaseDatabase.getInstance().getReference("Exercises");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

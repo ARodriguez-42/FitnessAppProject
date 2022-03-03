@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/drawable/rounded_corners.xml" value="0.1" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_bmiactivity.xml" value="0.2833333333333333" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_desc_exercise.xml" value="0.1" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_exercises.xml" value="0.36666666666666664" />

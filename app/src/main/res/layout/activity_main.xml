@@ -19,10 +19,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginVertical="16dp"
-            android:background="@color/black"
+            android:background="@drawable/rounded_corners"
             android:fontFamily="@font/metal_mania"
             android:gravity="center_horizontal"
-            android:text="Fitness Tracker"
+            android:text=" Fitness Tracker "
             android:textColor="@android:color/holo_orange_dark"
             android:textSize="48sp"
             android:textStyle="bold" />
@@ -32,10 +32,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginVertical="16dp"
-            android:background="@color/black"
+            android:background="@drawable/rounded_corners"
             android:fontFamily="serif"
             android:gravity="center_horizontal"
-            android:text="LOGIN"
+            android:text=" Login Below "
             android:textColor="@android:color/holo_orange_dark"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -55,6 +55,7 @@
                 android:background="@color/black"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,16 +73,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/black"
-
                 android:hint="Password"
                 android:inputType="textPassword"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="24dp"
             android:text="Login"
             app:backgroundTint="@android:color/holo_orange_dark" />
@@ -91,14 +93,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:background="@color/black"
+            android:background="@drawable/rounded_corners"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Not registered yet?"
+                android:text="  Not registered yet? "
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -108,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="Register here"
+                android:text=" Register here  "
                 android:textColor="@color/design_default_color_error"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -121,14 +123,14 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
 
-            android:background="@color/black"
+            android:background="@drawable/rounded_corners"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forgot Password?"
+                android:text="  Forgot Password? "
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -138,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="Reset Here"
+                android:text=" Reset Here  "
                 android:textColor="@color/design_default_color_error"
                 android:textSize="20sp"
                 android:textStyle="bold" />
