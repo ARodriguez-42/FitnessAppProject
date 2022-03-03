@@ -1,15 +1,20 @@
 package com.example.fitnessapp;
 
 
-import android.media.Image;
-
 
 public class Exercise {
 
-    String exerciseName, muscleGroupName, equipmentName, image;
+    String exerciseName, muscleGroupName, equipmentName, image, video;
+
+    public Exercise(String exerciseName, String muscleGroupName, String equipmentName, String image, String video) {
+        this.exerciseName = exerciseName;
+        this.muscleGroupName = muscleGroupName;
+        this.equipmentName = equipmentName;
+        this.image = image;
+        this.video = video;
+    }
 
     public String getExerciseName() {
-
         return exerciseName;
     }
 
@@ -21,6 +26,11 @@ public class Exercise {
     public String getEquipmentName() {
 
         return equipmentName;
+    }
+
+    public String getVideo() {
+
+        return video;
     }
 
     public String getImage() {

@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.fitnessapp.DescExercise;
 import com.example.fitnessapp.Exercise;
 import com.example.fitnessapp.ExerciseAdapter;
 import com.example.fitnessapp.R;
+import com.example.fitnessapp.RecyclerViewInterface;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Exercises extends AppCompatActivity {
+public class Exercises extends AppCompatActivity implements RecyclerViewInterface {
 
 
     RecyclerView recyclerView;
@@ -37,7 +40,7 @@ public class Exercises extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<Exercise>();
-        exerciseAdapter = new ExerciseAdapter(this, list);
+        exerciseAdapter = new ExerciseAdapter(this, list, this);
         recyclerView.setAdapter(exerciseAdapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -60,5 +63,18 @@ public class Exercises extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(Exercises.this, DescExercise.class);
+        intent.putExtra("exerciseName", list.get(position).getExerciseName());
+        intent.putExtra("muscleGroupName", list.get(position).getMuscleGroupName());
+        intent.putExtra("equipmentName", list.get(position).getEquipmentName());
+        intent.putExtra("image", list.get(position).getImage());
+        intent.putExtra("video", list.get(position).getVideo());
+
+        startActivity(intent);
+
     }
 }
