@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="8dp"
-    app:cardCornerRadius="8dp"
-    android:layout_margin="16dp">
+    android:layout_margin="16dp"
+    app:cardCornerRadius="20dp"
+    app:cardBackgroundColor="@color/black"
+    app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -24,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Exercise Name: "
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="24dp"
                 android:textStyle="bold" />
 
@@ -34,8 +35,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:text="Push Up"
-                android:textColor="@color/black"
-                android:textSize="24dp" />
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
@@ -49,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Muscle Group: "
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="24dp"
                 android:textStyle="bold" />
 
@@ -59,8 +61,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:text="Chest"
-                android:textColor="@color/black"
-                android:textSize="24dp" />
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
@@ -74,9 +77,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Equipment Used: "
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="24dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:id="@+id/equipmentNameInput"
@@ -84,8 +88,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:text="Push Up"
-                android:textColor="@color/black"
-                android:textSize="24dp" />
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
@@ -108,7 +113,6 @@
             </ImageView>
 
         </LinearLayout>
-        
 
 
     </LinearLayout>
