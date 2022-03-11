@@ -31,6 +31,14 @@ public class SlideshowFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_slideshow, container, false);
 
         MaterialButton listButton = view.findViewById(R.id.ListButton);
+        MaterialButton backListButton = view.findViewById(R.id.BackListButton);
+        MaterialButton absListButton = view.findViewById(R.id.AbsListButton);
+        MaterialButton bicepListButton = view.findViewById(R.id.BicepsListButton);
+        MaterialButton chestListButton = view.findViewById(R.id.ChestListButton);
+        MaterialButton legsListButton = view.findViewById(R.id.LegsListButton);
+        MaterialButton shoulderListButton = view.findViewById(R.id.ShoulderListButton);
+        MaterialButton tricepListButton = view.findViewById(R.id.TricepListButton);
+
 
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +48,71 @@ public class SlideshowFragment extends Fragment {
 
             }
         });
+
+        backListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getContext(), BackExercises.class));
+
+            }
+        });
+
+        absListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getContext(), AbsExercises.class));
+
+            }
+        });
+
+        bicepListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getContext(), BicepExercises.class));
+
+            }
+        });
+
+        chestListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getContext(), ChestExercises.class));
+
+            }
+        });
+
+        legsListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getContext(), LegsExercises.class));
+
+            }
+        });
+
+        shoulderListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getContext(), ShoulderExercises.class));
+
+            }
+        });
+
+        tricepListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getContext(), TricepExercises.class));
+
+            }
+        });
+
+
 
         return view;
     }

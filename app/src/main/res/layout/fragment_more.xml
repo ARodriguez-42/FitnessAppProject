@@ -7,24 +7,31 @@
     android:id="@+id/more"
     tools:context=".ui.more.More">
 
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_centerHorizontal="true">
     <com.google.android.material.button.MaterialButton
         android:id="@+id/BMIbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_orange_dark"
         android:layout_centerHorizontal="true"
         android:layout_margin="60dp"
-        android:text="Lean Body Mass Calculator"
-        />
+        android:layout_gravity="center"
+
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:text="Lean Body Mass Calculator" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/WILKSbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/BMIbutton"
+        android:layout_gravity="center"
         android:backgroundTint="@android:color/holo_orange_dark"
         android:layout_centerHorizontal="true"
         android:layout_margin="60dp"
+
         android:text="Wilks Calculator"
         />
     <com.google.android.material.button.MaterialButton
@@ -35,8 +42,10 @@
         android:backgroundTint="@android:color/holo_orange_dark"
         android:layout_centerHorizontal="true"
         android:layout_margin="60dp"
+        android:layout_gravity="center"
         android:text="KG/LBS Conversion"
         />
 
+</LinearLayout>
 
 </RelativeLayout>

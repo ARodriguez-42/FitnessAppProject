@@ -10,6 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessApp">
         <activity
+            android:name=".ui.slideshow.LegsExercises"
+            android:exported="false" />
+        <activity
+            android:name=".ui.slideshow.ShoulderExercises"
+            android:exported="false" />
+        <activity
+            android:name=".ui.slideshow.ChestExercises"
+            android:exported="false" />
+        <activity
+            android:name=".ui.slideshow.TricepExercises"
+            android:exported="false" />
+        <activity
+            android:name=".ui.slideshow.AbsExercises"
+            android:exported="false" />
+        <activity
+            android:name=".ui.slideshow.BicepExercises"
+            android:exported="false" />
+        <activity
+            android:name=".ui.slideshow.BackExercises"
+            android:exported="false" />
+        <activity
             android:name=".DescExercise"
             android:exported="false" />
         <activity

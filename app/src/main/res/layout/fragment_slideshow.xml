@@ -9,11 +9,16 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="60dp"
-        android:text="Show List of All Exercises"
+        android:layout_margin="15dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="60dp"
+        android:layout_centerHorizontal="true"
+        android:text="Push Button to View Exercises"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="40dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <com.google.android.material.button.MaterialButton
@@ -23,8 +28,85 @@
         android:backgroundTint="@android:color/holo_orange_dark"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:text="Click Here"
+        android:layout_margin="7dp"
+        android:text="All Exercise"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/AbsListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_below="@+id/ListButton"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="7dp"
+        android:text="Ab Exercises"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/BackListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_below="@+id/AbsListButton"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="7dp"
+        android:text="Back Exercises"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/BicepsListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_below="@+id/BackListButton"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="7dp"
+        android:text="Bicep Exercises"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ChestListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_below="@+id/BicepsListButton"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="7dp"
+        android:text="Chest Exercises"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/LegsListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_below="@+id/ChestListButton"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="7dp"
+        android:text="Legs Exercises"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ShoulderListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_below="@+id/LegsListButton"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="7dp"
+        android:text="Shoulder Exercises"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/TricepListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:layout_below="@+id/ShoulderListButton"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="7dp"
+        android:text="Tricep Exercises"
         />
 
 
