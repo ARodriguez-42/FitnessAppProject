@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessApp">
         <activity
+            android:name=".ui.home.WorkoutAdd"
+            android:exported="false" />
+        <activity
             android:name=".ui.slideshow.LegsExercises"
             android:exported="false" />
         <activity
