@@ -7,22 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.fitnessapp.KGtoLBSActivity;
 import com.example.fitnessapp.R;
-import com.example.fitnessapp.RegisterActivity;
-import com.example.fitnessapp.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    //private FragmentHomeBinding binding;
 
     CalendarView calendarView;
 
@@ -39,7 +34,7 @@ public class HomeFragment extends Fragment {
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, date, duration);
                 toast.show();
-                Intent intent = new Intent(getContext(), WorkoutAdd.class);
+                Intent intent = new Intent(getContext(), DisplayWorkout.class);
                 intent.putExtra("today", date);
                 startActivity(intent);
             }
@@ -51,6 +46,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        //binding = null;
     }
 }
