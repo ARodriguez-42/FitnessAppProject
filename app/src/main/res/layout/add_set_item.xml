@@ -31,7 +31,7 @@
             app:hintEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/strength_rep_tiet"
+                android:id="@+id/repIN"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -61,7 +61,7 @@
             app:hintEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/strength_weight_tiet"
+                android:id="@+id/weightIN"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
