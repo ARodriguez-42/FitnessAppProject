@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/drawable/add_exercise_background.xml" value="0.1335" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/drawable/rounded_border1.xml" value="0.23" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/drawable/rounded_corners.xml" value="0.1" />
@@ -11,11 +12,14 @@
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/font/metal_mania.xml" value="0.3037037037037037" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/abc.xml" value="0.23357664233576642" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_abs_exercises.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_add_exercise.xml" value="0.19444444444444445" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_add_sets.xml" value="0.22037037037037038" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_back_exercises.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_bicep_exercises.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_bmiactivity.xml" value="0.2833333333333333" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_chest_exercises.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_desc_exercise.xml" value="0.22" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_display_work.xml" value="0.3605128205128205" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_exercises.xml" value="0.1" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_kg_to_lbs.xml" value="0.33" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_leanbodymass.xml" value="0.1" />
@@ -40,6 +44,7 @@
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_more.xml" value="0.25" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_slideshow.xml" value="0.18" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/item_add_exercise.xml" value="0.25" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/nav_header_main_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/slideshow_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
