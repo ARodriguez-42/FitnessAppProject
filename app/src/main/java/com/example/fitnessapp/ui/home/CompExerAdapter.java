@@ -1,6 +1,7 @@
 package com.example.fitnessapp.ui.home;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,9 +40,11 @@ public class CompExerAdapter extends RecyclerView.Adapter<CompExerAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull CompExerAdapter.MyViewHolder holder, int position) {
 
-        CompExer exercise = list.get(position);
-        holder.exerciseName.setText(exercise.getName());
-        holder.setsAndReps.setText(exercise.displayExercises());
+        CompExer compExer = list.get(position);
+        String name = compExer.getName();
+        holder.exerciseName.setText(name);
+        Log.d("Display of the method: ", String.valueOf(compExer.displayExercises(compExer.getList())));
+        holder.setsAndReps.setText(compExer.displayExercises(compExer.getList()));
 
     }
 

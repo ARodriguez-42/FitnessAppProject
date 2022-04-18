@@ -28,6 +28,7 @@ public class AddExercise extends AppCompatActivity implements RecyclerViewInterf
     DatabaseReference databaseReference;
     AddExerciseAdapter addExerciseAdapter;
     ArrayList<Exercise> list;
+    String d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class AddExercise extends AppCompatActivity implements RecyclerViewInterf
         databaseReference = FirebaseDatabase.getInstance().getReference("Exercises");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        d = getIntent().getExtras().getString("date");
 
         list = new ArrayList<Exercise>();
         addExerciseAdapter = new AddExerciseAdapter(this, this, list);
@@ -71,7 +74,7 @@ public class AddExercise extends AppCompatActivity implements RecyclerViewInterf
 
         Intent intent = new Intent(AddExercise.this, AddSets.class);
         intent.putExtra("exerciseName", list.get(position).getExerciseName());
-
+        intent.putExtra("date", d);
         startActivity(intent);
 
     }

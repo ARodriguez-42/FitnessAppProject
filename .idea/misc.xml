@@ -13,7 +13,7 @@
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/abc.xml" value="0.23357664233576642" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_abs_exercises.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_add_exercise.xml" value="0.19444444444444445" />
-        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_add_sets.xml" value="0.22037037037037038" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_add_sets.xml" value="0.10084033613445378" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_back_exercises.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_bicep_exercises.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_bmiactivity.xml" value="0.2833333333333333" />
@@ -24,6 +24,7 @@
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_kg_to_lbs.xml" value="0.33" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_leanbodymass.xml" value="0.1" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_legs_exercises.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_macros.xml" value="0.2388888888888889" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_main2.xml" value="0.2611111111111111" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_main_abc.xml" value="0.2611111111111111" />
@@ -34,11 +35,13 @@
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_tricep_exercises.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_wilks.xml" value="0.25" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/activity_workout_add.xml" value="0.33" />
-        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/add_set_item.xml" value="0.33" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/add_set_item.xml" value="0.25" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/app_bar_main_menu.xml" value="0.18227848101265823" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/completed_exercise.xml" value="0.25555555555555554" />
-        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/completed_exercise_item.xml" value="0.33" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/completed_exercise_item.xml" value="0.1" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/content_main_menu.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/dialog_add_set.xml" value="0.1" />
+        <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/dialog_edit_del_set.xml" value="0.2388888888888889" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/exercise_item.xml" value="0.25" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_gallery.xml" value="0.33697916666666666" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />

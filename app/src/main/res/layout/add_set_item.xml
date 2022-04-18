@@ -5,9 +5,12 @@
     android:id="@+id/strength_cv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:checkable="true"
     android:clickable="true"
+    app:cardCornerRadius="20dp"
     android:longClickable="true">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,6 +22,7 @@
         android:paddingEnd="16dp"
         android:weightSum="20">
 
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
@@ -27,15 +31,20 @@
             android:layout_marginBottom="8dp"
             android:layout_weight="7"
             android:hint="Rep"
+            android:textColorHint="@color/white"
             app:errorEnabled="true"
-            app:hintEnabled="true">
+            app:hintEnabled="true"
+            app:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/repIN"
-                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/black"
                 android:imeOptions="actionDone"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="@color/white"
                 android:inputType="number"
                 android:maxLength="3" />
 
@@ -44,9 +53,10 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
             android:text="x"
+            android:textSize="12dp"
             android:textColor="@color/white"/>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -57,16 +67,20 @@
             android:layout_marginBottom="8dp"
             android:layout_weight="7"
             android:hint="Weight Used"
+            android:textColorHint="@color/white"
             app:errorEnabled="true"
             app:hintEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/weightIN"
-                android:background="@color/white"
+                android:background="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:imeOptions="actionDone"
                 android:inputType="number"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:maxLength="4" />
 
         </com.google.android.material.textfield.TextInputLayout>

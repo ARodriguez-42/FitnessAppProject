@@ -37,8 +37,8 @@ public class AddSetsAdapter extends RecyclerView.Adapter<AddSetsAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull AddSetsAdapter.MyViewHolder holder, int position) {
         Set set = list.get(position);
-        holder.weightIN.setText(set.getWeight());
-        holder.repIN.setText(set.getReps());
+        holder.weightIN.setText(String.valueOf(set.getWeight()));
+        holder.repIN.setText(String.valueOf(set.getReps()));
     }
 
     @Override

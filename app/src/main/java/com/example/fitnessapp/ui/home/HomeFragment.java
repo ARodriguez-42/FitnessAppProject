@@ -29,7 +29,8 @@ public class HomeFragment extends Fragment {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-                String date = month + "/" + day + "/" + year;
+                int mo = month + 1;
+                String date = mo + "/" + day + "/" + year;
                 Context context = getContext();
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, date, duration);
