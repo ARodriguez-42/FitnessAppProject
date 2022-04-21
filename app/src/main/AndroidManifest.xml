@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessApp">
         <activity
+            android:name=".ui.macro.DisplayMacroActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.gallery.AddSets"
             android:exported="false" />
         <activity
@@ -44,9 +47,6 @@
             android:exported="false" />
         <activity
             android:name=".ResetPassword"
-            android:exported="false" />
-        <activity
-            android:name=".Macros"
             android:exported="false" />
         <activity
             android:name=".ui.slideshow.Exercises"
