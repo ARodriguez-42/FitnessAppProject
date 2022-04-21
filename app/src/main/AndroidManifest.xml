@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessApp">
         <activity
-            android:name=".ui.home.AddSets"
+            android:name=".ui.gallery.AddSets"
             android:exported="false" />
         <activity
-            android:name=".ui.home.AddExercise"
+            android:name=".ui.gallery.AddExercise"
             android:exported="false" />
         <activity
-            android:name=".ui.home.DisplayWorkout"
+            android:name=".ui.gallery.DisplayWorkout"
             android:exported="false" />
         <activity
             android:name=".ui.slideshow.LegsExercises"

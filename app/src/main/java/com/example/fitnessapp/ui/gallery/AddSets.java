@@ -1,4 +1,4 @@
-package com.example.fitnessapp.ui.home;
+package com.example.fitnessapp.ui.gallery;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

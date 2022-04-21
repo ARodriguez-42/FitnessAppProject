@@ -1,4 +1,4 @@
-package com.example.fitnessapp.ui.home;
+package com.example.fitnessapp.ui.gallery;
 
 public class Set {
 

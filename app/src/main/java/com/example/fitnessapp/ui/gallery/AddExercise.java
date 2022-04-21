@@ -1,4 +1,4 @@
-package com.example.fitnessapp.ui.home;
+package com.example.fitnessapp.ui.gallery;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,12 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.fitnessapp.DescExercise;
 import com.example.fitnessapp.Exercise;
-import com.example.fitnessapp.ExerciseAdapter;
 import com.example.fitnessapp.R;
 import com.example.fitnessapp.RecyclerViewInterface;
-import com.example.fitnessapp.ui.slideshow.Exercises;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

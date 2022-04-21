@@ -52,6 +52,10 @@
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/layout/slideshow_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="..\:/Users/rodri/AndroidStudioProjects/FitnessApp/app/src/main/res/menu/main_menu.xml" value="0.36614583333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/activity_main_menu.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.35625" />
       </map>
     </option>
   </component>

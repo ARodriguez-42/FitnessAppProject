@@ -1,14 +1,14 @@
 package com.example.fitnessapp.ui.home;
 
-import java.io.Serializable;
+import com.example.fitnessapp.ui.gallery.Set;
+
 import java.util.ArrayList;
 
-public class CompExer implements Serializable {
-
+public class CompExerDash {
     String name;
     ArrayList<Set> list;
 
-    public CompExer(String name, ArrayList<Set> list) {
+    public CompExerDash(String name, ArrayList<Set> list) {
 
         this.name = name;
         this.list = list;

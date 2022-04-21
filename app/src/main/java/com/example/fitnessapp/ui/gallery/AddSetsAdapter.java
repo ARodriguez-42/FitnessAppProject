@@ -1,4 +1,4 @@
-package com.example.fitnessapp.ui.home;
+package com.example.fitnessapp.ui.gallery;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fitnessapp.Exercise;
 import com.example.fitnessapp.R;
 import com.example.fitnessapp.RecyclerViewInterface;
 
