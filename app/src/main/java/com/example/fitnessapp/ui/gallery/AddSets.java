@@ -103,7 +103,9 @@ public class AddSets extends AppCompatActivity implements RecyclerViewInterface 
                 //DocumentReference documentReference = firestore.collection("users").document(userID).collection("workouts").document(date);
 
                 CompExer compExer = new CompExer(exerciseName, setList);
-                firestore.collection("users").document(userID).collection("workouts").document(date).collection(exerciseName).add(compExer);
+                firestore.collection("users").document(userID)
+                        .collection("workouts").document(date)
+                        .collection(date).document(exerciseName).set(compExer);
 
                 /*HashMap<String, Object> temp = new HashMap<>();
                 temp.put(exerciseName, compExer);

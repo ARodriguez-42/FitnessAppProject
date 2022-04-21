@@ -1,6 +1,7 @@
 package com.example.fitnessapp.ui.gallery;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,9 +21,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,10 +70,35 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
         date.setText(d);
 
         String temp = d.replaceAll("/", ".");
-        DocumentReference documentReference = firestore.collection("users").document(userID)
-                .collection("workouts").document(temp);
+
+        firestore.collection("users").document(userID)
+                .collection("workouts").document(temp)
+                .collection(temp).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for(DocumentChange documentChange : value.getDocumentChanges()){
+                    Log.d("TAG", String.valueOf(documentChange.getDocument().get("list")));
+                    ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentChange.getDocument().get("list");
+                    ArrayList<Set> setArrayList = new ArrayList<>();
+                    for (HashMap hashMap: arrayList){
+                        long r1 = (long) hashMap.get("reps");
+                        long w1 = (long) hashMap.get("weight");
+                        int r = (int)r1;
+                        int w = (int)w1;
+                        setArrayList.add(new Set(r,w));
+                    }
+                    String name = (String) documentChange.getDocument().get("name");
+                    CompExer compExer = new CompExer(name, setArrayList);
+                    list.add(compExer);
+                    compExerAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        //DocumentReference documentReference = firestore.collection("users").document(userID).collection("workouts").document(temp);
 
 
+        /*
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -100,7 +130,7 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
 
             }
         });
-
+        */
 
 
         back.setOnClickListener(new View.OnClickListener() {
