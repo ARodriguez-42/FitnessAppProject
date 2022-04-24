@@ -42,7 +42,6 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
     FirebaseFirestore firestore;
     CompExerAdapter compExerAdapter;
     String userID;
-    String temp;
     Toolbar toolbar;
 
 
@@ -70,12 +69,68 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
         String d = getIntent().getExtras().getString("today");
         date.setText(d);
 
-        temp = d.replaceAll("/", ".");
+        String temp = d.replaceAll("/", ".");
 
-        displayWorkouts();
+        firestore.collection("users").document(userID)
+                .collection("workouts").document(temp)
+                .collection(temp).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for(DocumentChange documentChange : value.getDocumentChanges()){
+                    Log.d("TAG", String.valueOf(documentChange.getDocument().get("list")));
+                    ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentChange.getDocument().get("list");
+                    ArrayList<Set> setArrayList = new ArrayList<>();
+                    for (HashMap hashMap: arrayList){
+                        long r1 = (long) hashMap.get("reps");
+                        long w1 = (long) hashMap.get("weight");
+                        int r = (int)r1;
+                        int w = (int)w1;
+                        setArrayList.add(new Set(r,w));
+                    }
+                    String name = (String) documentChange.getDocument().get("name");
+                    CompExer compExer = new CompExer(name, setArrayList);
+                    list.add(compExer);
+                    compExerAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        //DocumentReference documentReference = firestore.collection("users").document(userID).collection("workouts").document(temp);
 
 
+        /*
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if (documentSnapshot.exists()) {
+                        ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentSnapshot.get("list");
+                        Log.d("TAG", String.valueOf(arrayList));
+                        ArrayList<Set> setArrayList = new ArrayList<Set>();
+                        for (HashMap hashMap : arrayList){
+                            long r1 = (long) hashMap.get("reps");
+                            long w1 = (long) hashMap.get("weight");
+                            int r = (int)r1;
+                            int w = (int)w1;
+                            setArrayList.add(new Set(r, w));
+                        }
 
+                        String name = (String) documentSnapshot.get("name");
+                        CompExer compExer = new CompExer(name, setArrayList);
+                        list.add(compExer);
+                        compExerAdapter.notifyDataSetChanged();
+                    } else {
+                        Log.d("TAG", "No such document");
+                    }
+                }
+                else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+
+            }
+        });
+        */
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -116,48 +171,6 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
 
 
 
-
-    }
-
-    private void displayWorkouts() {
-
-        Log.d("TAG", "Display method working");
-        firestore.collection("users").document(userID)
-                .collection("workouts").document(temp)
-                .collection(temp).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                if (error != null){
-                    Log.e("Firestore error", error.getMessage());
-                    return;
-                }
-                for (DocumentChange documentChange : value.getDocumentChanges()){
-
-                    if (documentChange.getType() == DocumentChange.Type.ADDED){
-                        ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentChange
-                                .getDocument().get("list");
-                        Log.d("TAG", String.valueOf(arrayList));
-                        ArrayList<Set> setArrayList = new ArrayList<Set>();
-                        for (HashMap hashMap : arrayList){
-                            long r1 = (long) hashMap.get("reps");
-                            long w1 = (long) hashMap.get("weight");
-                            int r = (int)r1;
-                            int w = (int)w1;
-                            setArrayList.add(new Set(r, w));
-                        }
-
-                        String name = (String) documentChange.getDocument().get("name");
-                        CompExer compExer = new CompExer(name, setArrayList);
-                        list.add(compExer);
-                        compExerAdapter.notifyDataSetChanged();
-
-                    }
-
-                }
-
-            }
-        });
 
     }
 
