@@ -19,8 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/black"
-            android:src="@drawable/ic_baseline_arrow_back_24">
-        </ImageButton>
+            android:src="@drawable/ic_baseline_arrow_back_24"></ImageButton>
 
         <TextView
             android:id="@+id/displayDate"
@@ -33,6 +32,17 @@
             android:textSize="28dp">
 
         </TextView>
+
+        <ImageButton
+            android:id="@+id/goalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="18dp"
+            android:background="@color/black"
+            android:src="@drawable/ic_baseline_settings_24">
+
+        </ImageButton>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -59,6 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:hint="Enter New Carb Value"
             android:textColor="@color/black"
             android:textSize="24dp"
             android:inputType="number"/>
@@ -90,6 +101,7 @@
             android:textSize="24dp"/>
 
         <EditText
+            android:hint="Enter New Protein Value"
             android:layout_gravity="center"
             android:id="@+id/proteinInput"
             android:layout_width="wrap_content"
@@ -126,6 +138,7 @@
             android:textSize="24dp"/>
 
         <EditText
+            android:hint="Enter New Fat Value"
             android:layout_gravity="center"
             android:id="@+id/fatInput"
             android:layout_width="wrap_content"
