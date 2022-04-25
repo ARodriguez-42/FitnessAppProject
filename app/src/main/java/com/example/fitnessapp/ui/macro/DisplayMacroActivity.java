@@ -170,6 +170,11 @@ public class DisplayMacroActivity extends AppCompatActivity {
                 hashMap.put("carb", c);
                 hashMap.put("protein", p);
                 hashMap.put("fat", f);
+
+                hashMap.put("carbMax", maxC);
+                hashMap.put("proteinMax", maxP);
+                hashMap.put("fatMax", maxF);
+
                 firestore.collection("users").document(userID)
                         .collection("macros").document(temp).set(hashMap);
             }

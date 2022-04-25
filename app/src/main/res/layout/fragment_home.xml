@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fitness3"
     tools:context=".ui.gallery.GalleryFragment">
 
     <LinearLayout
@@ -15,6 +16,7 @@
             android:id="@+id/todayDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_dark"
             android:textSize="30dp"
             android:textColor="@color/black"
             android:text="Date"
@@ -38,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Carbs"
-                    android:textColor="@color/dark_green"
+                    android:textColor="@android:color/holo_orange_dark"
                     android:textSize="40dp"
                     android:textStyle="bold">
 
@@ -71,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#535453"
+                android:background="@color/black"
                 android:orientation="vertical">
 
                 <TextView
@@ -79,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Protein"
-                    android:textColor="@color/dark_green"
+                    android:textColor="@android:color/holo_orange_dark"
                     android:textSize="40dp"
                     android:textStyle="bold">
 
@@ -118,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Fats"
-                    android:textColor="@color/dark_green"
+                    android:textColor="@android:color/holo_orange_dark"
                     android:textSize="40dp"
                     android:textStyle="bold">
 
@@ -154,6 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Workout"
+            android:background="@android:color/holo_orange_dark"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:gravity="center"
