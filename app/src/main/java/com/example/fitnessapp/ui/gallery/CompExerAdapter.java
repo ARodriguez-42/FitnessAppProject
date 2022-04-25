@@ -50,6 +50,11 @@ public class CompExerAdapter extends RecyclerView.Adapter<CompExerAdapter.MyView
         return list.size();
     }
 
+    public void remove(CompExer compExer){
+        list.remove(compExer);
+        notifyDataSetChanged();
+    }
+
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView exerciseName, setsAndReps;

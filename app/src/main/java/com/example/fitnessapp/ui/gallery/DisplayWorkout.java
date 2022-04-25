@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -43,6 +45,7 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
     CompExerAdapter compExerAdapter;
     String userID;
     Toolbar toolbar;
+    String temp;
 
 
     @Override
@@ -69,7 +72,7 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
         String d = getIntent().getExtras().getString("today");
         date.setText(d);
 
-        String temp = d.replaceAll("/", ".");
+        temp = d.replaceAll("/", ".");
 
         firestore.collection("users").document(userID)
                 .collection("workouts").document(temp)
@@ -95,43 +98,6 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
             }
         });
 
-        //DocumentReference documentReference = firestore.collection("users").document(userID).collection("workouts").document(temp);
-
-
-        /*
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if (documentSnapshot.exists()) {
-                        ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentSnapshot.get("list");
-                        Log.d("TAG", String.valueOf(arrayList));
-                        ArrayList<Set> setArrayList = new ArrayList<Set>();
-                        for (HashMap hashMap : arrayList){
-                            long r1 = (long) hashMap.get("reps");
-                            long w1 = (long) hashMap.get("weight");
-                            int r = (int)r1;
-                            int w = (int)w1;
-                            setArrayList.add(new Set(r, w));
-                        }
-
-                        String name = (String) documentSnapshot.get("name");
-                        CompExer compExer = new CompExer(name, setArrayList);
-                        list.add(compExer);
-                        compExerAdapter.notifyDataSetChanged();
-                    } else {
-                        Log.d("TAG", "No such document");
-                    }
-                }
-                else {
-                    Log.d("TAG", "get failed with ", task.getException());
-                }
-
-            }
-        });
-        */
-
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,22 +107,6 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
             }
         });
 
-        /*
-        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot != null && documentSnapshot.exists()){
-                    CompExer compExer = (CompExer) documentSnapshot.get("workoutSet");
-                    list.add(compExer);
-                    compExerAdapter.notifyDataSetChanged();
-                }
-                else{
-                    Toast.makeText(DisplayWorkout.this, "Nothing was read from Firestore for this date" + temp, Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });
-        */
 
 
         newWorkout.setOnClickListener(new View.OnClickListener() {
@@ -170,12 +120,51 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
         });
 
 
-
-
     }
 
     @Override
     public void onItemClick(int position) {
+
+        Log.d("TAG", String.valueOf(position));
+
+        Dialog dialog = new Dialog(DisplayWorkout.this);
+        dialog.setContentView(R.layout.dialog_edit_workout);
+
+        Button del = dialog.findViewById(R.id.delete);
+        Button editW = dialog.findViewById(R.id.editWorkout);
+        Button can = dialog.findViewById(R.id.cancel);
+
+        editW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DisplayWorkout.this, AddSets.class);
+                intent.putExtra("exerciseName", list.get(position).getName());
+                intent.putExtra("date", temp);
+                startActivity(intent);
+            }
+        });
+
+        can.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = list.get(position).getName();
+
+                DocumentReference documentReference = firestore.collection("users").document(userID)
+                        .collection("workouts").document(temp)
+                        .collection(temp).document(name);
+                documentReference.delete();
+                compExerAdapter.remove(list.get(position));
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
 
     }
 }

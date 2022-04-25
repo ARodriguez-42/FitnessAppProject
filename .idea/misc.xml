@@ -60,6 +60,8 @@
         <entry key="app/src/main/res/layout/activity_wilks.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/completed_exercise_item.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/dialog_edit_del_set.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/dialog_edit_macros.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/dialog_edit_workout.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/exercise_item.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.35625" />
