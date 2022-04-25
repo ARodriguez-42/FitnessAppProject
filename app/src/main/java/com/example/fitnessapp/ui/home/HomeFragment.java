@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,8 +23,12 @@ import com.example.fitnessapp.R;
 import com.example.fitnessapp.RecyclerViewInterface;
 import com.example.fitnessapp.ui.gallery.DisplayWorkout;
 import com.example.fitnessapp.ui.gallery.Set;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -45,10 +50,12 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
     String userID;
     String temp;
     ArrayList<CompExerDash> list;
-
+    int maxF, maxC, maxP;
     ProgressBar protein, fat, carb;
     EditText date;
     RecyclerView workoutView;
+    TextView totalC, totalF, totalP;
+    int finalF, finalC, finalP;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -57,16 +64,78 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         userID = firebaseAuth.getCurrentUser().getUid();
-
+        date = view.findViewById(R.id.todayDate);
         protein = view.findViewById(R.id.proteinBar);
         fat = view.findViewById(R.id.fatsBar);
         carb = view.findViewById(R.id.carbsBar);
-        date = view.findViewById(R.id.todayDate);
+        totalC = view.findViewById(R.id.totalC);
+        totalP = view.findViewById(R.id.totalP);
+        totalF = view.findViewById(R.id.totalF);
         workoutView = view.findViewById(R.id.workoutList);
+        maxF = 100;
+        maxC = 100;
+        maxP = 100;
+
+        DocumentReference dR = firestore.collection("users").document(userID)
+                .collection("goals").document("macro");
+        dR.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if(documentSnapshot.exists()){
+
+                        long c = (long) documentSnapshot.get("carb");
+                        long p = (long) documentSnapshot.get("protein");
+                        long f = (long) documentSnapshot.get("fat");
+                        int car = (int)c;
+                        int protei = (int)p;
+                        int fa = (int)f;
+                        maxC = car;
+                        maxF = fa;
+                        maxP = protei;
+                    }
+                }
+            }
+        });
+
+
 
         String d = new SimpleDateFormat("M-dd-yyyy", Locale.getDefault()).format(new Date());
 
         temp = d.replaceAll("-", ".");
+
+        DocumentReference documentReference = firestore.collection("users").document(userID).collection("macros").document(temp);
+
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    if(documentSnapshot.exists()){
+
+                        long c = (long) documentSnapshot.get("carb");
+                        long p = (long) documentSnapshot.get("protein");
+                        long f = (long) documentSnapshot.get("fat");
+                        int car = (int)c;
+                        int protei = (int)p;
+                        int fa = (int)f;
+                        finalF = fa;
+                        finalC = car;
+                        finalP = protei;
+                        carb.setProgress(finalC);
+                        fat.setProgress(finalF);
+                        protein.setProgress(finalP);
+                        String cText = finalC + "/" + maxC;
+                        String pText = finalF + "/" + maxP;
+                        String fText = finalP + "/" + maxF;
+                        totalP.setText(pText);
+                        totalF.setText(fText);
+                        totalC.setText(cText);
+                    }
+                }
+            }
+        });
 
         Log.d("TAG", String.valueOf(temp));
 
