@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
                 if (task.isSuccessful()){
                     DocumentSnapshot documentSnapshot = task.getResult();
                     if(documentSnapshot.exists()){
-
+                        Log.d("TAG", "Read goals");
                         long c = (long) documentSnapshot.get("carb");
                         long p = (long) documentSnapshot.get("protein");
                         long f = (long) documentSnapshot.get("fat");
@@ -113,7 +113,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
                 if (task.isSuccessful()){
                     DocumentSnapshot documentSnapshot = task.getResult();
                     if(documentSnapshot.exists()){
-
+                        Log.d("TAG", "Read macros");
                         long c = (long) documentSnapshot.get("carb");
                         long p = (long) documentSnapshot.get("protein");
                         long f = (long) documentSnapshot.get("fat");
@@ -153,7 +153,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
     }
 
     private void displayWorkouts() {
-
+        Log.d("TAG", "display called");
         firestore.collection("users").document(userID)
                 .collection("workouts").document(temp)
                 .collection(temp).addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -167,8 +167,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
                 for (DocumentChange documentChange : value.getDocumentChanges()){
 
                     if (documentChange.getType() == DocumentChange.Type.ADDED){
-                        ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentChange
-                                .getDocument().get("list");
+                        Log.d("TAG", "Read workout");
+                        ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentChange.getDocument().get("list");
                         ArrayList<Set> setArrayList = new ArrayList<Set>();
                         for (HashMap hashMap : arrayList){
                             long r1 = (long) hashMap.get("reps");
