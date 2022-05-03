@@ -1,6 +1,7 @@
 package com.example.fitnessapp.ui.gallery;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,9 +20,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,16 +70,17 @@ public class EditSets extends AppCompatActivity implements RecyclerViewInterface
         firestore = FirebaseFirestore.getInstance();
         userID = firebaseAuth.getCurrentUser().getUid();
 
-        DocumentReference dR = firestore.collection("users").document(userID)
-                .collection("workouts").document(datePass).collection(datePass).document(exerciseName);
-        dR.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firestore.collection("users").document(userID)
+                .collection("workouts").document(datePass)
+                .collection(datePass).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if(documentSnapshot.exists()){
-                        ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentSnapshot.get("list");
-                        Log.d("TAG", String.valueOf(arrayList));
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for(DocumentChange documentChange : value.getDocumentChanges()){
+                    Log.d("TAG", "set list");
+                    Log.d("TAG", String.valueOf(documentChange.getDocument().get("list")));
+                    ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentChange.getDocument().get("list");
+                    String name = (String) documentChange.getDocument().get("name");
+                    if (name.equals(exerciseName)){
                         for (HashMap hashMap: arrayList){
                             long r1 = (long) hashMap.get("reps");
                             long w1 = (long) hashMap.get("weight");
@@ -87,7 +93,8 @@ public class EditSets extends AppCompatActivity implements RecyclerViewInterface
             }
         });
 
-        Log.d("TAG", date);
+
+
         addSetsAdapter = new AddSetsAdapter(this, this, setList);
         recyclerView.setAdapter(addSetsAdapter);
 

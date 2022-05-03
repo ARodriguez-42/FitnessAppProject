@@ -31,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -80,6 +81,7 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 for(DocumentChange documentChange : value.getDocumentChanges()){
+
                     Log.d("TAG", String.valueOf(documentChange.getDocument().get("list")));
                     ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentChange.getDocument().get("list");
                     ArrayList<Set> setArrayList = new ArrayList<>();
@@ -125,7 +127,7 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
     @Override
     public void onItemClick(int position) {
 
-        Log.d("TAG", String.valueOf(position));
+
 
         Dialog dialog = new Dialog(DisplayWorkout.this);
         dialog.setContentView(R.layout.dialog_edit_workout);
@@ -140,6 +142,8 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
                 Intent intent = new Intent(DisplayWorkout.this, AddSets.class);
                 intent.putExtra("exerciseName", list.get(position).getName());
                 intent.putExtra("date", temp);
+                Log.d("TAG", "abc123");
+                Log.d("TAG", String.valueOf(list.get(position).getList()));
                 intent.putExtra("sets", list.get(position).getList());
                 startActivity(intent);
             }
