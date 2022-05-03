@@ -32,6 +32,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
@@ -45,7 +46,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
     //private FragmentHomeBinding binding;
 
     FirebaseAuth firebaseAuth;
-    FirebaseFirestore firestore;
+    FirebaseFirestore firestore, firebaseFirestore;
     CompExerDashAdapter compExerAdapter;
     String userID;
     String temp;
@@ -63,6 +64,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
         list = new ArrayList<>();
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
         userID = firebaseAuth.getCurrentUser().getUid();
         date = view.findViewById(R.id.todayDate);
         protein = view.findViewById(R.id.proteinBar);
@@ -76,6 +78,17 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
         maxC = 100;
         maxP = 100;
 
+        String d = new SimpleDateFormat("M-dd-yyyy", Locale.getDefault()).format(new Date());
+
+        temp = d.replaceAll("-", ".");
+        date.setText(d);
+
+        workoutView.setHasFixedSize(true);
+        workoutView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        compExerAdapter = new CompExerDashAdapter(this.getContext(), list , this);
+        workoutView.setAdapter(compExerAdapter);
+
         DocumentReference dR = firestore.collection("users").document(userID)
                 .collection("goals").document("macro");
         dR.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -84,7 +97,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
                 if (task.isSuccessful()){
                     DocumentSnapshot documentSnapshot = task.getResult();
                     if(documentSnapshot.exists()){
-                        Log.d("TAG", "Read goals");
+
                         long c = (long) documentSnapshot.get("carb");
                         long p = (long) documentSnapshot.get("protein");
                         long f = (long) documentSnapshot.get("fat");
@@ -94,29 +107,42 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
                         maxC = car;
                         maxF = fa;
                         maxP = protei;
+                        long c1 = (long) documentSnapshot.get("tcarb");
+                        long p1 = (long) documentSnapshot.get("tprotein");
+                        long f1 = (long) documentSnapshot.get("tfat");
+                        int car1 = (int)c1;
+                        int protei1 = (int)p1;
+                        int fa1 = (int)f1;
+                        finalF = fa1;
+                        finalC = car1;
+                        finalP = protei1;
+                        carb.setProgress(finalC);
+                        fat.setProgress(finalF);
+                        protein.setProgress(finalP);
+                        String cText = finalC + "/" + maxC;
+                        String pText = finalF + "/" + maxP;
+                        String fText = finalP + "/" + maxF;
+                        totalP.setText(pText);
+                        totalF.setText(fText);
+                        totalC.setText(cText);
                     }
                 }
             }
         });
 
-
-
-        String d = new SimpleDateFormat("M-dd-yyyy", Locale.getDefault()).format(new Date());
-
-        temp = d.replaceAll("-", ".");
-
+        /*
         DocumentReference documentReference = firestore.collection("users").document(userID).collection("macros").document(temp);
 
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()){
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if(documentSnapshot.exists()){
-                        Log.d("TAG", "Read macros");
-                        long c = (long) documentSnapshot.get("carb");
-                        long p = (long) documentSnapshot.get("protein");
-                        long f = (long) documentSnapshot.get("fat");
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+                        Log.d("TAG", "macro file read");
+                        long c = (long) document.get("carb");
+                        long p = (long) document.get("protein");
+                        long f = (long) document.get("fat");
                         int car = (int)c;
                         int protei = (int)p;
                         int fa = (int)f;
@@ -137,26 +163,51 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
             }
         });
 
-        Log.d("TAG", String.valueOf(temp));
+        */
 
-        date.setText(d);
+        firebaseFirestore.collection("users").document(userID)
+                .collection("workouts").document(temp)
+                .collection(temp).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot doc : task.getResult()){
+                        Log.d("TAG", "display called");
+                        ArrayList<HashMap> arrayList = (ArrayList<HashMap>) doc
+                                .get("list");
+                        ArrayList<Set> setArrayList = new ArrayList<Set>();
+                        for (HashMap hashMap : arrayList){
+                            long r1 = (long) hashMap.get("reps");
+                            long w1 = (long) hashMap.get("weight");
+                            int r = (int)r1;
+                            int w = (int)w1;
+                            setArrayList.add(new Set(r, w));
+                        }
 
-        workoutView.setHasFixedSize(true);
-        workoutView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+                        String name = (String) doc.get("name");
+                        CompExerDash compExer = new CompExerDash(name, setArrayList);
+                        list.add(compExer);
+                        compExerAdapter.notifyDataSetChanged();
+                    }
+                }
+                else{
+                    Log.d("TAG", "Error getting documents: ", task.getException());
+                }
+            }
+        });
 
-        compExerAdapter = new CompExerDashAdapter(this.getContext(), list , this);
-        workoutView.setAdapter(compExerAdapter);
-
-        displayWorkouts();
+        //displayWorkouts();
 
         return view;
     }
 
     private void displayWorkouts() {
         Log.d("TAG", "display called");
-        firestore.collection("users").document(userID)
-                .collection("workouts").document(temp)
-                .collection(temp).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        Log.d("TAG", String.valueOf(temp));
+        String s = "5.02,2022";
+        firebaseFirestore.collection("users").document(userID)
+                .collection("workouts").document(s)
+                .collection(s).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
@@ -165,10 +216,10 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
                     return;
                 }
                 for (DocumentChange documentChange : value.getDocumentChanges()){
-
+                    Log.d("TAG", "display working");
                     if (documentChange.getType() == DocumentChange.Type.ADDED){
-                        Log.d("TAG", "Read workout");
-                        ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentChange.getDocument().get("list");
+                        ArrayList<HashMap> arrayList = (ArrayList<HashMap>) documentChange
+                                .getDocument().get("list");
                         ArrayList<Set> setArrayList = new ArrayList<Set>();
                         for (HashMap hashMap : arrayList){
                             long r1 = (long) hashMap.get("reps");
@@ -180,8 +231,6 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
 
                         String name = (String) documentChange.getDocument().get("name");
                         CompExerDash compExer = new CompExerDash(name, setArrayList);
-                        Log.d("TAG", "MAthod is here");
-                        Log.d("TAG", String.valueOf(arrayList));
                         list.add(compExer);
                         compExerAdapter.notifyDataSetChanged();
 

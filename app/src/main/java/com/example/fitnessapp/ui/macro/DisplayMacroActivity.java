@@ -177,6 +177,16 @@ public class DisplayMacroActivity extends AppCompatActivity {
 
                 firestore.collection("users").document(userID)
                         .collection("macros").document(temp).set(hashMap);
+                HashMap test = new HashMap();
+                test.put("carb", maxC);
+                test.put("protein", maxP);
+                test.put("fat", maxF);
+                test.put("tcarb", c);
+                test.put("tprotein", p);
+                test.put("tfat", f);
+
+                firestore.collection("users").document(userID)
+                        .collection("goals").document("macro").set(test);
             }
         });
 
