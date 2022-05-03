@@ -1,10 +1,12 @@
 package com.example.fitnessapp.ui.gallery;
 
-public class Set {
+import java.io.Serializable;
+
+public class Set implements Serializable {
 
     int weight, reps;
 
-    public Set(int weight, int reps) {
+    public Set(int reps, int weight) {
         this.weight = weight;
         this.reps = reps;
     }

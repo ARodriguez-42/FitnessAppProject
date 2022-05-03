@@ -140,6 +140,7 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
                 Intent intent = new Intent(DisplayWorkout.this, AddSets.class);
                 intent.putExtra("exerciseName", list.get(position).getName());
                 intent.putExtra("date", temp);
+                intent.putExtra("sets", list.get(position).getList());
                 startActivity(intent);
             }
         });

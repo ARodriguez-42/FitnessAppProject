@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
     ArrayList<CompExerDash> list;
     int maxF, maxC, maxP;
     ProgressBar protein, fat, carb;
-    EditText date;
+    TextView date;
     RecyclerView workoutView;
     TextView totalC, totalF, totalP;
     int finalF, finalC, finalP;
@@ -79,8 +79,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
         maxP = 100;
 
         String d = new SimpleDateFormat("M-dd-yyyy", Locale.getDefault()).format(new Date());
-
-        temp = d.replaceAll("-", ".");
+        String d1 = new SimpleDateFormat("M-d-yyyy", Locale.getDefault()).format(new Date());
+        temp = d1.replaceAll("-", ".");
         date.setText(d);
 
         workoutView.setHasFixedSize(true);
@@ -107,30 +107,12 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
                         maxC = car;
                         maxF = fa;
                         maxP = protei;
-                        long c1 = (long) documentSnapshot.get("tcarb");
-                        long p1 = (long) documentSnapshot.get("tprotein");
-                        long f1 = (long) documentSnapshot.get("tfat");
-                        int car1 = (int)c1;
-                        int protei1 = (int)p1;
-                        int fa1 = (int)f1;
-                        finalF = fa1;
-                        finalC = car1;
-                        finalP = protei1;
-                        carb.setProgress(finalC);
-                        fat.setProgress(finalF);
-                        protein.setProgress(finalP);
-                        String cText = finalC + "/" + maxC;
-                        String pText = finalF + "/" + maxP;
-                        String fText = finalP + "/" + maxF;
-                        totalP.setText(pText);
-                        totalF.setText(fText);
-                        totalC.setText(cText);
                     }
                 }
             }
         });
 
-        /*
+
         DocumentReference documentReference = firestore.collection("users").document(userID).collection("macros").document(temp);
 
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -163,7 +145,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
             }
         });
 
-        */
+
 
         firebaseFirestore.collection("users").document(userID)
                 .collection("workouts").document(temp)
