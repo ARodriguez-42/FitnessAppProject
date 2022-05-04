@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,17 +16,21 @@ import com.example.fitnessapp.R;
 import com.example.fitnessapp.RecyclerViewInterface;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
-public class AddExerciseAdapter extends RecyclerView.Adapter<AddExerciseAdapter.MyViewHolder> {
+public class AddExerciseAdapter extends RecyclerView.Adapter<AddExerciseAdapter.MyViewHolder> implements Filterable {
 
     private final RecyclerViewInterface recyclerViewInterface;
     Context context;
     ArrayList<Exercise> list;
+    ArrayList<Exercise> listFilter;
 
     public AddExerciseAdapter(RecyclerViewInterface recyclerViewInterface, Context context, ArrayList<Exercise> list) {
         this.recyclerViewInterface = recyclerViewInterface;
         this.context = context;
         this.list = list;
+        this.listFilter = list;
     }
 
     @NonNull
@@ -37,14 +43,45 @@ public class AddExerciseAdapter extends RecyclerView.Adapter<AddExerciseAdapter.
     @Override
     public void onBindViewHolder(@NonNull AddExerciseAdapter.MyViewHolder holder, int position) {
 
-        Exercise exercise = list.get(position);
+        Exercise exercise = listFilter.get(position);
         holder.exerciseName.setText(exercise.getExerciseName());
 
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return listFilter.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String d = charSequence.toString();
+                if (d.isEmpty()){
+                    listFilter = list;
+                }
+                else {
+                    ArrayList<Exercise> temp = new ArrayList<>();
+                    for(Exercise e : listFilter){
+                        if(e.getExerciseName().toLowerCase().contains(d.toLowerCase())){
+                            temp.add(e);
+                        }
+                    }
+                    listFilter = temp;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = listFilter;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                listFilter = (ArrayList<Exercise>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{

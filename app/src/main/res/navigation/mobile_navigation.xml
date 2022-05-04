@@ -32,4 +32,9 @@
         android:name="com.example.fitnessapp.ui.macro.MacroFragment"
         android:label="Macro Journal"
         tools:layout="@layout/macro_fragment"/>
+    <fragment
+        android:id="@+id/nav_weight"
+        android:name="com.example.fitnessapp.ui.weight.WeightFragment"
+        android:label="Weight Tracker"
+        tools:layout="@layout/weight_fragment"/>
 </navigation>

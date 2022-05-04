@@ -3,6 +3,8 @@ package com.example.fitnessapp.ui.macro;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -18,25 +20,31 @@ import android.widget.Toolbar;
 
 import com.example.fitnessapp.MainMenu;
 import com.example.fitnessapp.R;
+import com.example.fitnessapp.RecyclerViewInterface;
 import com.example.fitnessapp.ui.gallery.AddSets;
+import com.example.fitnessapp.ui.gallery.CompExer;
+import com.example.fitnessapp.ui.gallery.CompExerAdapter;
 import com.example.fitnessapp.ui.gallery.DisplayWorkout;
+import com.example.fitnessapp.ui.gallery.Set;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DisplayMacroActivity extends AppCompatActivity {
+public class DisplayMacroActivity extends AppCompatActivity implements RecyclerViewInterface {
 
     ProgressBar fBar, cBar, pBar;
-    TextView pInput, cInput, fInput, fProgress, cProgress, pProgress, date;
+    TextView fProgress, cProgress, pProgress, date;
     MaterialButton edit;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firestore;
@@ -44,12 +52,22 @@ public class DisplayMacroActivity extends AppCompatActivity {
     ImageButton back, goal;
     int maxF, maxC, maxP;
     int finalF, finalC, finalP;
-
+    RecyclerView recyclerView;
+    MealAdapter mealAdapter;
+    ArrayList<Meal> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_macro);
+
+        list = new ArrayList<>();
+
+        recyclerView = findViewById(R.id.foodList);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mealAdapter = new MealAdapter(this, list , this);
+        recyclerView.setAdapter(mealAdapter);
 
         maxC = 100;
         maxF = 100;
@@ -68,9 +86,6 @@ public class DisplayMacroActivity extends AppCompatActivity {
         fBar = (ProgressBar) findViewById(R.id.fBar);
         cBar = (ProgressBar) findViewById(R.id.cBar);
         pBar = (ProgressBar) findViewById(R.id.pBar);
-        pInput = findViewById(R.id.proteinInput);
-        cInput = findViewById(R.id.carbInput);
-        fInput = findViewById(R.id.fatInput);
         fProgress = findViewById(R.id.fProgress);
         cProgress = findViewById(R.id.cProgress);
         pProgress = findViewById(R.id.pProgress);
@@ -102,6 +117,9 @@ public class DisplayMacroActivity extends AppCompatActivity {
                         maxC = carb;
                         maxF = fat;
                         maxP = protein;
+                        cBar.setProgress(finalC);
+                        fBar.setProgress(finalF);
+                        pBar.setProgress(finalP);
                         String cText = finalC + "/" + maxC;
                         String pText = finalP + "/" + maxP;
                         String fText = finalF + "/" + maxF;
@@ -113,9 +131,30 @@ public class DisplayMacroActivity extends AppCompatActivity {
             }
         });
 
-        cBar.setProgress(0);
-        fBar.setProgress(0);
-        pBar.setProgress(0);
+
+
+        firestore.collection("users").document(userID)
+                .collection("macros").document(temp)
+                .collection(temp).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for(DocumentChange documentChange : value.getDocumentChanges()){
+
+                    long t = (long) documentChange.getDocument().get("c");
+                    int c = (int) t;
+                    long t1 = (long) documentChange.getDocument().get("p");
+                    int p = (int) t1;
+                    long t2 = (long) documentChange.getDocument().get("f");
+                    int f = (int) t2;
+                    String name = (String) documentChange.getDocument().get("name");
+                    Meal meal = new Meal(name, c, p, f);
+                    list.add(meal);
+                    mealAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
 
         DocumentReference documentReference = firestore.collection("users").document(userID).collection("macros").document(temp);
 
@@ -154,39 +193,54 @@ public class DisplayMacroActivity extends AppCompatActivity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int p =  Integer.parseInt(pInput.getText().toString());
-                pBar.setProgress(p);
-                String s = p + "/" + maxP;
-                pProgress.setText(s);
-                int f =  Integer.parseInt(fInput.getText().toString());
-                fBar.setProgress(f);
-                String t = f + "/" + maxF;
-                fProgress.setText(t);
-                int c =  Integer.parseInt(cInput.getText().toString());
-                cBar.setProgress(c);
-                String v = c + "/" + maxC;
-                cProgress.setText(v);
-                HashMap hashMap = new HashMap();
-                hashMap.put("carb", c);
-                hashMap.put("protein", p);
-                hashMap.put("fat", f);
 
-                hashMap.put("carbMax", maxC);
-                hashMap.put("proteinMax", maxP);
-                hashMap.put("fatMax", maxF);
+                Dialog dialog = new Dialog(DisplayMacroActivity.this);
+                dialog.setContentView(R.layout.dialog_add_meal);
+                Button editM = dialog.findViewById(R.id.addMeal);
+                EditText n = dialog.findViewById(R.id.name);
+                EditText p = dialog.findViewById(R.id.pInput);
+                EditText c = dialog.findViewById(R.id.cInput);
+                EditText f = dialog.findViewById(R.id.fInput);
 
-                firestore.collection("users").document(userID)
-                        .collection("macros").document(temp).set(hashMap);
-                HashMap test = new HashMap();
-                test.put("carb", maxC);
-                test.put("protein", maxP);
-                test.put("fat", maxF);
-                test.put("tcarb", c);
-                test.put("tprotein", p);
-                test.put("tfat", f);
+                editM.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int c1 = Integer.parseInt(c.getText().toString());
+                        int p1 = Integer.parseInt(p.getText().toString());
+                        int f1 = Integer.parseInt(f.getText().toString());
+                        finalC += c1;
+                        finalP += p1;
+                        finalF += f1;
+                        cBar.setProgress(finalC);
+                        fBar.setProgress(finalF);
+                        pBar.setProgress(finalP);
+                        String cText = finalC + "/" + maxC;
+                        String pText = finalP + "/" + maxP;
+                        String fText = finalF + "/" + maxF;
+                        pProgress.setText(pText);
+                        fProgress.setText(fText);
+                        cProgress.setText(cText);
 
-                firestore.collection("users").document(userID)
-                        .collection("goals").document("macro").set(test);
+                        HashMap hashMap = new HashMap();
+                        hashMap.put("carb", finalC);
+                        hashMap.put("protein", finalP);
+                        hashMap.put("fat", finalF);
+                        firestore.collection("users").document(userID)
+                                .collection("macros").document(temp).set(hashMap);
+
+                        String name = n.getText().toString();
+
+                        Meal meal = new Meal(name, c1, p1, f1);
+                        firestore.collection("users").document(userID)
+                                .collection("macros").document(temp)
+                        .collection(temp).document(name).set(meal);
+
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+
+
             }
         });
 
@@ -239,6 +293,11 @@ public class DisplayMacroActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+    }
+
+    @Override
+    public void onItemClick(int position) {
 
     }
 }

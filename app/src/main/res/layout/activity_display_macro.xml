@@ -63,22 +63,13 @@
             android:textColor="@color/black"
             android:textSize="24dp"/>
 
-        <EditText
-            android:layout_gravity="center"
-            android:id="@+id/carbInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:hint="Enter New Carb Value"
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            android:inputType="number"/>
+
 
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:id="@+id/cBar"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:indeterminateTint="@color/dark_green">
 
@@ -100,21 +91,12 @@
             android:textColor="@color/black"
             android:textSize="24dp"/>
 
-        <EditText
-            android:hint="Enter New Protein Value"
-            android:layout_gravity="center"
-            android:id="@+id/proteinInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            android:inputType="number"/>
+
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:id="@+id/pBar"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:progress="0"
             android:indeterminateTint="@color/dark_green">
@@ -137,21 +119,12 @@
             android:textColor="@color/black"
             android:textSize="24dp"/>
 
-        <EditText
-            android:hint="Enter New Fat Value"
-            android:layout_gravity="center"
-            android:id="@+id/fatInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            android:inputType="number"/>
+
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:id="@+id/fBar"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:progress="0"
             android:indeterminateTint="@color/dark_green">
@@ -164,6 +137,11 @@
             android:text="0/100"
             android:textSize="20dp"
             android:textColor="@color/dark_green"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/foodList"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -181,6 +159,7 @@
                 android:layout_weight="1"
                 android:text="Edit Daily Macro Intake"
                 app:backgroundTint="@android:color/holo_red_dark" />
+
 
 
         </LinearLayout>

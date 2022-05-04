@@ -7,6 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
+import android.widget.Toolbar;
 
 import com.example.fitnessapp.Exercise;
 import com.example.fitnessapp.R;
@@ -26,11 +30,15 @@ public class AddExercise extends AppCompatActivity implements RecyclerViewInterf
     AddExerciseAdapter addExerciseAdapter;
     ArrayList<Exercise> list;
     String d;
+    androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_exercise);
+
+        toolbar = findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.addExerciseList);
         databaseReference = FirebaseDatabase.getInstance().getReference("Exercises");
@@ -74,5 +82,29 @@ public class AddExercise extends AppCompatActivity implements RecyclerViewInterf
         intent.putExtra("date", d);
         startActivity(intent);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+
+        MenuItem item = menu.findItem(R.id.search_bar);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                addExerciseAdapter.getFilter().filter(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                addExerciseAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 }

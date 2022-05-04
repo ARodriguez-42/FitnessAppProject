@@ -21,9 +21,9 @@
             android:icon="@drawable/ic_baseline_food_bank_24"
             android:title="@string/menu_macro" />
         <item
-            android:id="@+id/nav_challenge"
+            android:id="@+id/nav_weight"
             android:icon="@drawable/ic_baseline_stars_24"
-            android:title="@string/menu_challenge" />
+            android:title="Weight Tracker" />
         <item
             android:id="@+id/nav_more"
             android:icon="@drawable/ic_baseline_more_vert_24"
