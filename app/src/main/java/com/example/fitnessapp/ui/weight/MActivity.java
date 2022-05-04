@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.fitnessapp.R;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -65,26 +67,37 @@ public class MActivity extends AppCompatActivity {
         String d1 = new SimpleDateFormat("M-d-yyyy", Locale.getDefault()).format(new Date());
         temp = d1.replaceAll("-", ".");
 
-
-
-
-
         ArrayList<Entry> bfVals =new ArrayList<Entry>();
 
-
-        bfVals.add(new Entry(0, 10));
-        bfVals.add(new Entry(1, 30));
-        bfVals.add(new Entry(2, 40));
-        bfVals.add(new Entry(3, 80));
-        bfVals.add(new Entry(4, 100));
+        bfVals.add(new Entry(0f, 10f));
+        bfVals.add(new Entry(10f, 30f));
+        bfVals.add(new Entry(20f, 40f));
+        bfVals.add(new Entry(30f, 80f));
+        bfVals.add(new Entry(40f, 100f));
         LineDataSet lineDataSet = new LineDataSet(bfVals, "Body Fat");
         lineDataSet.setDrawCircles(true);
+        lineDataSet.setLineWidth(4f);
         lineDataSet.setColor(Color.BLUE);
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet);
-        LineData data = new LineData();
+        LineData data = new LineData(dataSets);
         bfgraph.setBackgroundColor(Color.WHITE);
+        bfgraph.getDescription().setEnabled(true);
+        bfgraph.getDescription().setText("Chart 1");
+        YAxis leftAxis = bfgraph.getAxisLeft();
+        leftAxis.setTextColor(Color.BLUE);
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setAxisMaximum(100f);
+        leftAxis.setAxisMinimum(0f);
+        XAxis xAxis = bfgraph.getXAxis();
+        xAxis.setTextColor(Color.BLUE);
+        xAxis.setDrawGridLines(false);
+        xAxis.setAxisMaximum(100f);
+        xAxis.setAxisMinimum(0f);
+
+
         bfgraph.setData(data);
+        bfgraph.notifyDataSetChanged();
         bfgraph.invalidate();
 
 

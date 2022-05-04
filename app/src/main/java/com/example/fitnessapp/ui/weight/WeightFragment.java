@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,19 +23,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fitnessapp.R;
+import com.example.fitnessapp.ui.gallery.CompExer;
 import com.example.fitnessapp.ui.gallery.DisplayWorkout;
 import com.example.fitnessapp.ui.gallery.Set;
 import com.example.fitnessapp.ui.home.CompExerDash;
 import com.example.fitnessapp.ui.macro.DisplayMacroActivity;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -55,8 +65,12 @@ public class WeightFragment extends Fragment {
     EditText bw, bf;
     TextView todayDate;
     Button update;
-    ArrayList<Integer> weight, bodyFat;
+    ArrayList<Float> weight, bodyFat;
     ArrayList<String> dates;
+    ArrayList<Entry> bfVals;
+    ArrayList<Entry> bwVals;
+    int count = 0;
+    float size = 0;
 
 
     private WeightViewModel mViewModel;
@@ -84,6 +98,8 @@ public class WeightFragment extends Fragment {
         bodyFat = new ArrayList<>();
         weight = new ArrayList<>();
         dates = new ArrayList<>();
+        bfVals =new ArrayList<Entry>();
+        bwVals =new ArrayList<Entry>();
 
         String d1 = new SimpleDateFormat("M-d-yyyy", Locale.getDefault()).format(new Date());
         temp = d1.replaceAll("-", ".");
@@ -91,105 +107,173 @@ public class WeightFragment extends Fragment {
 
 
         firebaseFirestore.collection("users").document(userID)
-                .collection("weight").get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .collection("weight").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()){
-                    for (QueryDocumentSnapshot doc : task.getResult()){
-                        Log.d("TAG", "display called");
-                        HashMap hashMap1 = (HashMap) doc.get("map");
-                        double w = (double) hashMap1.get("w");
-                        double bf = (double) hashMap1.get("bf");
-                        int w1 = (int) w;
-                        int bf1 = (int) bf;
-                        dates.add((String) hashMap1.get("date"));
-                        weight.add(w1);
-                        bodyFat.add(bf1);
-                    }
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                for(DocumentChange documentChange : value.getDocumentChanges()){
+                    float f = (float) count;
+                    String sw = String.valueOf(documentChange.getDocument().get("w"));
+                    String bfw = String.valueOf(documentChange.getDocument().get("bf"));
+                    float w = Float.parseFloat(sw);
+                    float bf = Float.parseFloat(bfw);
+                    Log.d("TAG weight", String.valueOf(w));
+                    bfVals.add(new Entry(f, bf));
+                    bwVals.add(new Entry(f, w));
+                    dates.add((String) documentChange.getDocument().get("date"));
+                    weight.add(w);
+                    bodyFat.add(bf);
+                    Log.d("TAG weight list", String.valueOf(weight));
+                    count++;
+                    size++;
+                    updateChart(bwVals,bfVals);
                 }
             }
+
         });
 
-        ArrayList<Entry> bfVals =new ArrayList<Entry>();
-        ArrayList<Entry> wVals =new ArrayList<Entry>();
 
-        bfVals.add(new Entry(0f, 10f));
-        bfVals.add(new Entry(1f, 30f));
-        bfVals.add(new Entry(2f, 40f));
-        bfVals.add(new Entry(3f, 80f));
-        bfVals.add(new Entry(4f, 100f));
-        LineDataSet lineDataSet = new LineDataSet(bfVals, "Body Fat");
-        lineDataSet.setDrawCircles(false);
-        lineDataSet.setColor(Color.BLUE);
+
+        LineDataSet bwDataSet = new LineDataSet(bwVals, "Body Weight");
+        bwDataSet.setDrawCircles(true);
+        bwDataSet.setLineWidth(4f);
+        bwDataSet.setColor(Color.YELLOW);
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(lineDataSet);
-        LineData data = new LineData();
-        bfgraph.setBackgroundColor(Color.BLACK);
-        bfgraph.setData(data);
+        dataSets.add(bwDataSet);
+        LineData wDate = new LineData(bwDataSet);
+        bwgraph.setBackgroundColor(Color.WHITE);
+        bwgraph.getDescription().setEnabled(true);
+        bwgraph.getDescription().setText("Chart 1");
+        YAxis leftAxis = bwgraph.getAxisLeft();
+        leftAxis.setTextColor(Color.BLUE);
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setAxisMaximum(400f);
+        leftAxis.setAxisMinimum(0f);
+        XAxis xAxis = bwgraph.getXAxis();
+        xAxis.setTextColor(Color.BLUE);
+        xAxis.setDrawGridLines(false);
+        xAxis.setAxisMaximum(20f);
+        xAxis.setAxisMinimum(0f);
+        bwgraph.setData(wDate);
+        bwgraph.notifyDataSetChanged();
+        bwgraph.invalidate();
+
+        LineDataSet bfDataSet = new LineDataSet(bfVals, "Body Fat");
+        bfDataSet.setDrawCircles(true);
+        bfDataSet.setLineWidth(4f);
+        bfDataSet.setColor(Color.YELLOW);
+        ArrayList<ILineDataSet> bfDataSets = new ArrayList<>();
+        bfDataSets.add(bfDataSet);
+        LineData bfData = new LineData(bfDataSets);
+        bfgraph.setBackgroundColor(Color.WHITE);
+        bfgraph.getDescription().setEnabled(true);
+        bfgraph.getDescription().setText("Chart 1");
+        YAxis leftAxis1 = bfgraph.getAxisLeft();
+        leftAxis1.setTextColor(Color.BLUE);
+        leftAxis1.setDrawGridLines(false);
+        leftAxis1.setAxisMaximum(60f);
+        leftAxis1.setAxisMinimum(0f);
+        XAxis xAxis1 = bfgraph.getXAxis();
+        xAxis1.setTextColor(Color.BLUE);
+        xAxis1.setDrawGridLines(false);
+        xAxis1.setAxisMaximum(20f);
+        xAxis1.setAxisMinimum(0f);
+        bfgraph.setData(bfData);
         bfgraph.notifyDataSetChanged();
         bfgraph.invalidate();
 
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), MActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        /*
-        int c = 0;
-        int y = 0;
-
-        for (int d : weight){
-            wVals.add(new Entry(c, d));
-            c++;
-        }
-
-        for (int i : bodyFat){
-            bfVals.add(new Entry(y, i));
-            y++;
-        }
-
-        LineDataSet bwLine = new LineDataSet(wVals, "Body Weight");
-        bwLine.setDrawCircles(false);
-        bwLine.setColor(Color.BLUE);
-
-        LineDataSet bfLine = new LineDataSet(bfVals, "Body Fat");
-        bfLine.setDrawCircles(false);
-        bfLine.setColor(Color.BLUE);
-
-        int n = 0;
-        String s[] = new String[dates.size()];
-        for(String h : dates){
-            s[n] = h;
-        }
-
-
-        bwgraph.setData(new LineData(bwLine));
-        bwgraph.invalidate();
-
-
-
-        bfgraph.setData(new LineData(bwLine));
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String q = bw.getText().toString();
-                String w = bf.getText().toString();
-                int t = Integer.parseInt(q);
-                int r = Integer.parseInt(w);
-                bodyFat.add(r);
-                weight.add(t);
-                dates.add(temp);
+
+                if (TextUtils.isEmpty(bw.getText().toString()) || TextUtils.isEmpty(bf.getText().toString())){
+                    Context context = getContext();
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, "Please Enter a Value for Both Inputs", duration);
+                    toast.show();
+                }
+                else {
+                    HashMap hashMap = new HashMap();
+                    float w = Float.parseFloat(bw.getText().toString());
+                    float bf1 = Float.parseFloat(bf.getText().toString());
+                    hashMap.put("w", w);
+                    hashMap.put("bf", bf1);
+                    hashMap.put("date", temp);
+                    firebaseFirestore.collection("users").document(userID)
+                            .collection("weight").document(temp).set(hashMap);
+                    if(dates.contains(temp)){
+
+                        bwVals.set(weight.size()-1, new Entry(weight.size()-1, w));
+                        bfVals.set(weight.size()-1, new Entry(weight.size()-1, bf1));
+
+                    }
+                    else {
+
+                        bwVals.add(new Entry(weight.size(), w));
+                        bfVals.add(new Entry(weight.size(), bf1));
+                    }
+                    updateChart(bwVals,bfVals);
+                }
+
+
             }
         });
-
-         */
 
         return view;
+    }
+
+    private void updateChart(ArrayList<Entry> weight, ArrayList<Entry> bodyFat) {
+
+        LineDataSet bwDataSet = new LineDataSet(weight, "Body Weight");
+        bwDataSet.setDrawCircles(true);
+        bwDataSet.setLineWidth(4f);
+        bwDataSet.setColor(Color.YELLOW);
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(bwDataSet);
+        LineData wDate = new LineData(bwDataSet);
+        bwgraph.setBackgroundColor(Color.WHITE);
+        bwgraph.getDescription().setEnabled(true);
+        bwgraph.getDescription().setText("Chart 1");
+        YAxis leftAxis = bwgraph.getAxisLeft();
+        leftAxis.setTextColor(Color.BLUE);
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setAxisMaximum(400f);
+        leftAxis.setAxisMinimum(0f);
+        XAxis xAxis = bwgraph.getXAxis();
+        xAxis.setTextColor(Color.BLUE);
+        xAxis.setDrawGridLines(false);
+        xAxis.setAxisMaximum(size);
+        xAxis.setAxisMinimum(0f);
+        bwgraph.setData(wDate);
+        bwgraph.notifyDataSetChanged();
+        bwgraph.invalidate();
+
+        LineDataSet bfDataSet = new LineDataSet(bodyFat, "Body Fat");
+        bfDataSet.setDrawCircles(true);
+        bfDataSet.setLineWidth(4f);
+        bfDataSet.setColor(Color.YELLOW);
+        ArrayList<ILineDataSet> bfDataSets = new ArrayList<>();
+        bfDataSets.add(bfDataSet);
+        LineData bfData = new LineData(bfDataSets);
+        bfgraph.setBackgroundColor(Color.WHITE);
+        bfgraph.getDescription().setEnabled(true);
+        bfgraph.getDescription().setText("Chart 1");
+        YAxis leftAxis1 = bfgraph.getAxisLeft();
+        leftAxis1.setTextColor(Color.BLUE);
+        leftAxis1.setDrawGridLines(false);
+        leftAxis1.setAxisMaximum(60f);
+        leftAxis1.setAxisMinimum(0f);
+        XAxis xAxis1 = bfgraph.getXAxis();
+        xAxis1.setTextColor(Color.BLUE);
+        xAxis1.setDrawGridLines(false);
+        xAxis1.setAxisMaximum(size);
+        xAxis1.setValueFormatter(new IndexAxisValueFormatter(dates));
+        xAxis1.setAxisMinimum(0f);
+        bfgraph.setData(bfData);
+        bfgraph.notifyDataSetChanged();
+        bfgraph.invalidate();
+
     }
 
     @Override
