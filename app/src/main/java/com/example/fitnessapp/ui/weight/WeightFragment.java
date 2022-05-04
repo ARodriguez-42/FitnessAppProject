@@ -268,7 +268,6 @@ public class WeightFragment extends Fragment {
         xAxis1.setTextColor(Color.BLUE);
         xAxis1.setDrawGridLines(false);
         xAxis1.setAxisMaximum(size);
-        xAxis1.setValueFormatter(new IndexAxisValueFormatter(dates));
         xAxis1.setAxisMinimum(0f);
         bfgraph.setData(bfData);
         bfgraph.notifyDataSetChanged();
