@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessApp">
         <activity
+            android:name=".ui.gallery.LoadWorkoutsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.weight.MActivity"
             android:exported="false" />
         <activity

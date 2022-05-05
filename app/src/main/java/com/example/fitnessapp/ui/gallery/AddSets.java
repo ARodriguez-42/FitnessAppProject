@@ -107,15 +107,6 @@ public class AddSets extends AppCompatActivity implements RecyclerViewInterface 
                         .collection("workouts").document(date)
                         .collection(date).document(exerciseName).set(compExer);
 
-                /*HashMap<String, Object> temp = new HashMap<>();
-                temp.put(exerciseName, compExer);
-                firestore.collection("users").document(userID)
-                        .collection("workouts").document(date)
-                        .set(temp);
-                */
-
-                //firestore.collection("users").document(userID).collection("workouts").document(date).collection(exerciseName).document(exerciseName).set(compExer);
-
 
                 Intent intent = new Intent(AddSets.this, DisplayWorkout.class);
                 intent.putExtra("today", datePass);

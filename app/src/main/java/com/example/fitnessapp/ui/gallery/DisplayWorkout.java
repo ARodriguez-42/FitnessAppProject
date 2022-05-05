@@ -38,7 +38,7 @@ import java.util.HashMap;
 public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInterface {
 
     TextView date;
-    MaterialButton newWorkout, save;
+    MaterialButton newWorkout, load;
     ArrayList<CompExer> list;
     RecyclerView recyclerView;
     FirebaseAuth firebaseAuth;
@@ -63,6 +63,7 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
         firestore = FirebaseFirestore.getInstance();
         userID = firebaseAuth.getCurrentUser().getUid();
         newWorkout = findViewById(R.id.new_workout);
+        load = findViewById(R.id.predefinedWorkout);
         date = findViewById(R.id.displayDate);
         recyclerView = findViewById(R.id.completedSetList);
         recyclerView.setHasFixedSize(true);
@@ -121,13 +122,19 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
             }
         });
 
+        load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DisplayWorkout.this, LoadWorkoutsActivity.class);
+                intent.putExtra("date", d);
+                startActivity(intent);
+            }
+        });
 
     }
 
     @Override
     public void onItemClick(int position) {
-
-
 
         Dialog dialog = new Dialog(DisplayWorkout.this);
         dialog.setContentView(R.layout.dialog_edit_workout);
@@ -142,9 +149,10 @@ public class DisplayWorkout extends AppCompatActivity implements RecyclerViewInt
                 Intent intent = new Intent(DisplayWorkout.this, AddSets.class);
                 intent.putExtra("exerciseName", list.get(position).getName());
                 intent.putExtra("date", temp);
+                intent.putExtra("list", list.get(position).getList());
                 Log.d("TAG", "abc123");
-                Log.d("TAG", String.valueOf(list.get(position).getList()));
-                intent.putExtra("sets", list.get(position).getList());
+                Log.d("TAG", String.valueOf(list.get(position).getName()));
+                Log.d("TAG", temp);
                 startActivity(intent);
             }
         });

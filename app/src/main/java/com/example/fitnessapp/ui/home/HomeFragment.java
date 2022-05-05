@@ -57,6 +57,7 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
     RecyclerView workoutView;
     TextView totalC, totalF, totalP;
     int finalF, finalC, finalP;
+    int mc, mp , mf;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -77,6 +78,11 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
         maxF = 100;
         maxC = 100;
         maxP = 100;
+
+        mc= 0;
+        mf=0;
+        mp=0;
+
 
         String d = new SimpleDateFormat("M-dd-yyyy", Locale.getDefault()).format(new Date());
         String d1 = new SimpleDateFormat("M-d-yyyy", Locale.getDefault()).format(new Date());
@@ -107,6 +113,12 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
                         maxC = car;
                         maxF = fa;
                         maxP = protei;
+                        mc = car;
+                        mp = protei;
+                        mf = fa;
+                        carb.setMax(car);
+                        fat.setMax(fa);
+                        protein.setMax(protei);
                     }
                 }
             }
@@ -134,9 +146,9 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
                         carb.setProgress(finalC);
                         fat.setProgress(finalF);
                         protein.setProgress(finalP);
-                        String cText = finalC + "/" + maxC;
-                        String pText = finalF + "/" + maxP;
-                        String fText = finalP + "/" + maxF;
+                        String cText = finalC + "/" + mc;
+                        String pText = finalP + "/" + mp;
+                        String fText = finalF + "/" + mf;
                         totalP.setText(pText);
                         totalF.setText(fText);
                         totalC.setText(cText);

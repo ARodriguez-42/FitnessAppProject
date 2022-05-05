@@ -234,7 +234,7 @@ public class WeightFragment extends Fragment {
         LineData wDate = new LineData(bwDataSet);
         bwgraph.setBackgroundColor(Color.WHITE);
         bwgraph.getDescription().setEnabled(true);
-        bwgraph.getDescription().setText("Chart 1");
+        bwgraph.getDescription().setText("Body Weight");
         YAxis leftAxis = bwgraph.getAxisLeft();
         leftAxis.setTextColor(Color.BLUE);
         leftAxis.setDrawGridLines(false);
@@ -258,7 +258,7 @@ public class WeightFragment extends Fragment {
         LineData bfData = new LineData(bfDataSets);
         bfgraph.setBackgroundColor(Color.WHITE);
         bfgraph.getDescription().setEnabled(true);
-        bfgraph.getDescription().setText("Chart 1");
+        bfgraph.getDescription().setText("Body Fat");
         YAxis leftAxis1 = bfgraph.getAxisLeft();
         leftAxis1.setTextColor(Color.BLUE);
         leftAxis1.setDrawGridLines(false);
